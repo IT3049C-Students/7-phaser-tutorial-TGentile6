@@ -11,7 +11,20 @@ class scene2 extends Phaser.Scene {
         this.ship2 = this.add.sprite(config.width/2, config.height/2, "ship2");
         this.ship3 = this.add.sprite(config.width/2 + 50, config.height/2, "ship3");
 
-        this.add.text(20, 20, "Playing Game...", {font: "25px Arial", fill: "yellow"});
+        //score
+        var graphics = this.add.graphics();
+        graphics.fillStyle(0x000000, 1);
+        graphics.beginPath();
+        graphics.moveTo(0, 0);
+        graphics.lineTo(config.width, 0);
+        graphics.lineTo(config.height, 20);
+        graphics.lineTo(0, 20);
+        graphics.lineTo(0, 0);
+        graphics.closePath();
+        graphics.fillPath();
+
+        this.score = 0;
+        this.scoreLabel = this.add.bitmapText(10, 5, "pixelFont", "SCORE", 16);
 
         //player
         this.player = this.physics.add.sprite(config.width / 2-8, config.height - 64, "player");
@@ -144,5 +157,16 @@ class scene2 extends Phaser.Scene {
     hitEnemy(projectile, enemy){
         projectile.destroy();
         this.resetShipPos(enemy);
+        this.score += 15;
+        var scoreFormatted = this.zeroPad(this.score, 6);
+        this.scoreLabel.text = "SCORE " + scoreFormatted;
+    }
+
+    zeroPad(number, size){
+        var stringNumber = String(number);
+        while(stringNumber.length < (size || 2)){
+            stringNumber = "0" + stringNumber;
+        }
+        return stringNumber;
     }
 }
