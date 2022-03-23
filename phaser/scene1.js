@@ -5,9 +5,22 @@ class scene1 extends Phaser.Scene {
 
     preload(){
         this.load.image("background", "phaser/images/background.png");
-        this.load.image("ship", "phaser/images/ship.png");
-        this.load.image("ship2", "phaser/images/ship2.png");
-        this.load.image("ship3", "phaser/images/ship3.png");
+        this.load.spritesheet("ship", "phaser/spritesheets/ship.png",{
+            frameWidth: 16,
+            frameHeight: 16
+        });
+        this.load.spritesheet("ship2", "phaser/spritesheets/ship2.png",{
+            frameWidth: 32,
+            frameHeight: 16
+        });
+        this.load.spritesheet("ship3", "phaser/spritesheets/ship3.png",{
+            frameWidth: 32,
+            frameHeight: 32
+        });
+        this.load.spritesheet("explosion", "phaser/spritesheets/explosion.png",{
+            frameWidth: 16,
+            frameHeight: 16
+        })
     }
 
     create() {
